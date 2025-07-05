@@ -1,0 +1,4 @@
+Plan:
+- Focus on 1 vs 1 Character Battle, with Turn Based Combat Mechanism.
+- Player gain ability to Attack, Use Skill, and Guard
+- Uses 1 Class for Character
