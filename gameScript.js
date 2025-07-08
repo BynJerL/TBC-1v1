@@ -1,11 +1,13 @@
 class Character {
     /** @param {string} name @param {number} health @param {number} attackPower @param {number} defensePower  */ 
-    constructor(name, health, attackPower, defensePower) {
+    constructor(name, health, attackPower, defensePower, critChance = 0.1, critDamage = 0.5) {
         this.name = name;
         this.health = health;
         this.maxHealth = health;
         this.attackPower = attackPower;
         this.defensePower = defensePower;
+        this.critChance = critChance;
+        this.critDamage = critDamage;
     }
 
     /** @param {number} amount*/ 
@@ -20,7 +22,8 @@ class Character {
 
     /** @param {Character} target @returns {number} */
     attack (target) {
-        const damage = Math.max(0, Math.floor(this.attackPower - target.defensePower * 0.5));
+        const isCrit = Math.random() < 0.1;
+        const damage = Math.max(0, Math.floor(this.attackPower * (1 + isCrit * this.critDamage) - target.defensePower * 0.5));
         target.takeDamage(damage);
         return damage;
     } 
