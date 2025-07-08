@@ -15,12 +15,14 @@ class Character {
 
     /** @param {number} amount */
     takeDamage (amount) {
-        this.modifyHealth(Math.min(0, -amount));
+        this.modifyHealth(-amount);
     }
 
-    /** @param {Character} target */
+    /** @param {Character} target @returns {number} */
     attack (target) {
-        target.takeDamage(Math.floor(this.attackPower - target.defensePower * 0.5));
+        const damage = Math.max(0, Math.floor(this.attackPower - target.defensePower * 0.5));
+        target.takeDamage(damage);
+        return damage;
     } 
 
     isAlive () {
@@ -57,8 +59,8 @@ const GameManager = {
         const opponent = players[opponentIndex];
 
         if (currentPlayer.isAlive() && opponent.isAlive()) {
-            currentPlayer.attack(opponent);
-            console.log(`${currentPlayer.name} attacks ${opponent.name}!`);
+            const damage = currentPlayer.attack(opponent);
+            console.log(`${currentPlayer.name} dealt ${damage} damage to ${opponent.name}!`);
             console.log(opponent.getStr());
         }
 
