@@ -1,10 +1,11 @@
 class Character {
-    /** @param {string} name @param {number} health @param {number} attackPower  */ 
-    constructor(name, health, attackPower) {
+    /** @param {string} name @param {number} health @param {number} attackPower @param {number} defensePower  */ 
+    constructor(name, health, attackPower, defensePower) {
         this.name = name;
         this.health = health;
         this.maxHealth = health;
         this.attackPower = attackPower;
+        this.defensePower = defensePower;
     }
 
     /** @param {number} amount*/ 
@@ -14,12 +15,12 @@ class Character {
 
     /** @param {number} amount */
     takeDamage (amount) {
-        this.modifyHealth(-amount);
+        this.modifyHealth(Math.min(0, -amount));
     }
 
     /** @param {Character} target */
     attack (target) {
-        target.takeDamage(this.attackPower);
+        target.takeDamage(Math.floor(this.attackPower - target.defensePower * 0.5));
     } 
 
     isAlive () {
@@ -32,8 +33,8 @@ class Character {
 }
 
 const players = [
-    new Character("Hero", 100, 20),
-    new Character("Villain", 80, 15)
+    new Character("Hero", 300, 30, 100),
+    new Character("Villain", 150, 15, 5)
 ];
 
 const GameManager = {
@@ -73,7 +74,7 @@ const GameManager = {
         this.checkState();
     },
     checkState () {
-        if (this.isRunning === true) {
+        if (this.isRunning) {
             this.currentIndex = (this.currentIndex + 1) % players.length;
             this.run();
         } else {
