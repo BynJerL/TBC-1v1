@@ -23,7 +23,7 @@ class Character {
     } 
 
     isAlive () {
-        return this.health <= 0;
+        return this.health > 0;
     }
 
     getStr () {
@@ -38,16 +38,52 @@ const players = [
 
 const GameManager = {
     isRunning : true,
+    winner: null,
+    currentIndex: 0,
 
     init () {
         this.isRunning = true;
+        this.currentIndex = 0;
+        this.winner = null;
         for (const player of players) {
             console.log(player.getStr());
         }
+        this.run();
     },
     run () {
-        // 
+        const currentPlayer = players[this.currentIndex];
+        const opponentIndex = (this.currentIndex + 1) % players.length;
+        const opponent = players[opponentIndex];
+
+        if (currentPlayer.isAlive() && opponent.isAlive()) {
+            currentPlayer.attack(opponent);
+            console.log(`${currentPlayer.name} attacks ${opponent.name}!`);
+            console.log(opponent.getStr());
+        }
+
+        if (!opponent.isAlive()) {
+            this.isRunning = false;
+        }
+
+        if (players.filter(player => player.isAlive()).length === 1) {
+            this.winner = players.find(player => player.isAlive());
+            this.isRunning = false;
+        }
+
+        this.checkState();
+    },
+    checkState () {
+        if (this.isRunning === true) {
+            this.currentIndex = (this.currentIndex + 1) % players.length;
+            this.run();
+        } else {
+            if (this.winner) {
+                console.log(`${this.winner.name} wins!`);
+            } else {
+                console.log("It's a draw!");
+            }
+        }
     }
 }
 
-GameManager.init()
+GameManager.init();
