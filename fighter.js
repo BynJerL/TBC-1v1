@@ -1,7 +1,6 @@
 class Fighter {
-    /**
-     * An object contains necessary data for the fighter.
-     * @param {string} name used for naming the fighter.
+    /** An object contains necessary data for the fighter.
+     * @param {string} name name of the fighter.
      * @param {number} Hp initial value of health point of the fighter.
      * @param {number} Sp initial value of skill point of the fighter.
      * @param {number} attack initial value of attack point of the fighter.
@@ -25,58 +24,62 @@ class Fighter {
         this.isGuard = false;
     }
 
-    /** @returns {boolean}*/ 
+    /** Check if the player is alive or not. 
+     * @returns {boolean}*/ 
     isAlive () {
         return this.currHp > 0;
     }
 
-    /** @returns {boolean}*/ 
+    /** Check if the player trigger critical hit or not.
+     * @returns {boolean}*/ 
     isCrit () {
         return Math.random() < this.critChance;
     }
 
-    /** @returns {boolean}*/
+    /** Check if the skill point is enough for performing a skill.
+     * @param {number} requiredSp cost of the skill.
+     * @returns {boolean}*/
     isNotEnoughSp (requiredSp) {
         return this.currSp < requiredSp;
     }
 
-    /** 
-     * @param {number} amount 
+    /** Modify health point by certain amount.
+     * @param {number} amount amount of change.
      * @returns {void}*/ 
     modifyHpBy (amount) {
         this.currHp = Math.max(0, Math.min(this.currHp + amount, this.maxHp));
     }
 
-    /** 
-     * @param {number} amount 
+    /** Modify skill point by certain amount.
+     * @param {number} amount amount of change.
      * @returns {void}*/
     modifySpBy (amount) {
         this.currSp = Math.max(0, Math.min(this.currSp + amount, this.maxSp));
     }
 
-    /** 
-     * @param {number} amount 
+    /** Decrease health point by certain amount.
+     * @param {number} amount amount of change.
      * @returns {void}*/ 
     takeDamage (amount) {
         this.modifyHpBy(-amount);
     }
 
-    /** 
-     * @param {number} amount 
+    /** Decrease skill point by certain amount.
+     * @param {number} amount amount of change.
      * @returns {void}*/ 
     paySkill (amount) {
         this.modifySpBy(-amount);
     }
 
-    /** 
-     * @param {number} amount 
+    /** Increase health point by certain amount.
+     * @param {number} amount amount of change.
      * @returns {void}*/
     gainHp (amount) {
         this.modifyHpBy(amount);
     }
 
-    /** 
-     * @param {number} amount 
+    /** Increase skill point by certain amount.
+     * @param {number} amount amount of change.
      * @returns {null}*/
     gainSp (amount) {
         this.modifySpBy(amount);
