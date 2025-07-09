@@ -3,7 +3,7 @@ class Character {
      * @param {string} name @param {number} health 
      * @param {number} attackPower @param {number} defensePower  
      * */ 
-    constructor(name, health, attackPower, defensePower, critChance = 0.1, critDamage = 0.5) {
+    constructor(name, health, attackPower, defensePower, critChance = 0.1, critDamage = 0.5, evasion = 0.05) {
         this.name = name;
         this.health = health;
         this.maxHealth = health;
@@ -16,6 +16,7 @@ class Character {
         this.lightningResistance = null;
         this.critChance = critChance;
         this.critDamage = critDamage;
+        this.evasion = evasion;
         this.isGuard = false;
     }
 
@@ -29,11 +30,12 @@ class Character {
         this.modifyHealth(-amount);
     }
 
-    /** @param {Character} target @returns {number} */
+    /** @param {Character} target @returns {number, null} */
     attack (target) {
-        const isCrit = Math.random() < 0.1;
-        const damage = Math.max(0, Math.floor(this.attackPower * (1 + isCrit * this.critDamage) - (target.defensePower * 0.2 + target.isGuard * target.defensePower * 0.6)));
-        target.takeDamage(damage);
+        const isCrit = Math.random() < this.critChance;
+        const isMiss = Math.random() < this.evasion;
+        const damage = (!isMiss)? Math.max(0, Math.floor(this.attackPower * (1 + isCrit * this.critDamage) - (target.defensePower * 0.2 + target.isGuard * target.defensePower * 0.6))) : null;
+        target.takeDamage((damage !== null)? damage: 0);
         return damage;
     } 
 
@@ -72,7 +74,12 @@ const GameManager = {
 
         if (currentPlayer.isAlive() && opponent.isAlive()) {
             const damage = currentPlayer.attack(opponent);
-            console.log(`${currentPlayer.name} dealt ${damage} damage to ${opponent.name}!`);
+            if (damage !== null) {
+                console.log(`${currentPlayer.name} dealt ${damage} damage to ${opponent.name}!`);
+            } else {
+                console.log(`${currentPlayer.name} missed attack on ${opponent.name}`);
+            }
+            
             console.log(opponent.getStr());
         }
 
