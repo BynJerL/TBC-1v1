@@ -33,7 +33,7 @@ class Character {
     /** @param {Character} target @returns {number, null} */
     attack (target) {
         const isCrit = Math.random() < this.critChance;
-        const isMiss = Math.random() < this.evasion;
+        const isMiss = Math.random() < target.evasion;
         const damage = (!isMiss)? Math.max(0, Math.floor(this.attackPower * (1 + isCrit * this.critDamage) - (target.defensePower * 0.2 + target.isGuard * target.defensePower * 0.6))) : null;
         target.takeDamage((damage !== null)? damage: 0);
         return damage;
