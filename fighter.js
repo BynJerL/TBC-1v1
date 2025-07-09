@@ -9,7 +9,7 @@ class Fighter {
      * @param {number} speed initial value of speed point of the fighter.
      * @param {number} critChance initial value of chance of critical hit.
      * @param {number} critDamage initial value of damage boost from critical hit. */ 
-    constructor (name, Hp, Sp, attack, defense, speed, evasion, critChance, critDamage) {
+    constructor ({name, Hp, Sp, attack, defense, speed, evasion = 0.05, critChance = 0.1, critDamage = 0.5}) {
         this.name = name;
         this.currHp = Hp;
         this.maxHp = Hp;
