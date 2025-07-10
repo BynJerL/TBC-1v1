@@ -1,4 +1,4 @@
-class Fighter {
+export class Fighter {
     /** An object contains necessary data for the fighter.
      * @param {string} name name of the fighter.
      * @param {number} Hp initial value of health point of the fighter.
@@ -83,5 +83,24 @@ class Fighter {
      * @returns {null}*/
     gainSp (amount) {
         this.modifySpBy(amount);
+    }
+
+    /** Perform attack to a target.
+     * @param {Fighter} target fighter that you attack.
+     * @returns {{damage: number, isCrit: boolean, isMiss: boolean}}*/ 
+    doAttack (target) {
+        const isMiss = Math.random() < target.evasion;
+        if (isMiss) return {damage: 0, isCrit: false, isMiss: true};
+
+        const isCrit = this.isCrit();
+        const rawDamage = this.attack * (1 + isCrit * this.critDamage);
+        const actualDamage = Math.max(0, Math.floor(rawDamage - (0.2 + 0.6 * target.isGuard) * target.defense));
+
+        target.takeDamage(actualDamage);
+        return {
+            damage: actualDamage,
+            isCrit: isCrit,
+            isMiss: false
+        };
     }
 }
