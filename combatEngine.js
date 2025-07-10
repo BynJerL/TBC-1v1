@@ -47,7 +47,9 @@ export class CombatEngine {
 
         if (this.isRunning) {
             this.currentIndex = (this.currentIndex + 1) % 2
-            this.loop();
+            setTimeout(() => {
+                this.loop();
+            }, 1000);
         } else {
             console.log(`${this.winner.name} wins!`);
         }
