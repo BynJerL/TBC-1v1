@@ -2,3 +2,6 @@ Plan:
 - Focus on 1 vs 1 Character Battle, with Turn Based Combat Mechanism.
 - Player gain ability to Attack, Use Skill, and Guard
 - Uses 1 Class for Character
+
+Improvement:
+- First turn depends on head-or-tail/rock-paper-scissor/dice-roll

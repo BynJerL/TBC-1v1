@@ -8,18 +8,38 @@
 </head>
 <body>
     <div id="game-container">Check console
-        <div id="top-bar">Top Bar</div>
-        <div id="center-bar">
-            <div id="player-sprite">Player Sprite
-                <div class="fighter-stats" id="player-stats">Player Stats</div>
+        <div id="top-bar">
+            <div id="turn-queue">
+                <div class="turn-item">Hero</div>
+                <div class="turn-item">Enemy</div>
             </div>
-            <div id="enemy-sprite">Enemy Sprite
-                <div class="fighter-stats" id="enemy-stats">Enemy Stats</div>
+        </div>
+        <div id="center-bar">
+            <div id="player-sprite">
+                <div class="sprite-image"></div>
+                <div class="fighter-stats" id="player-stats">
+                    <div class="fighter-name">Hero</div>
+                    <div class="fighter-hp">HP: 100/100</div>
+                    <div class="fighter-sp">SP: 20/20</div>
+                </div>
+            </div>
+            <div id="enemy-sprite">
+                <div class="sprite-image"></div>
+                <div class="fighter-stats" id="enemy-stats">
+                    <div class="fighter-name">Enemy</div>
+                    <div class="fighter-hp">HP: 100/100</div>
+                    <div class="fighter-sp">SP: 20/20</div>
+                </div>
             </div>
         </div>
         <div id="bottom-bar">
             <div id="action-info">Action Info</div>
-            <div id="action-bar">Action Bar</div>
+            <div id="action-bar">
+                <button id="attack-button">Attack</button>
+                <button id="defend-button">Defend</button>
+                <button id="special-button">Special</button>
+                <button class="check-stats-button">Check Stats</button>
+            </div>
         </div>
     </div>
     <script type="module" src="./main.js"></script>
