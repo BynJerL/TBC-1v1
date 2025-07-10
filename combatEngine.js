@@ -1,4 +1,4 @@
-import { Fighter } from "./fighter";
+import { Fighter } from "./fighter.js";
 
 export class CombatEngine {
     /** An object used to manage the game combat.
@@ -25,20 +25,23 @@ export class CombatEngine {
     loop () {
         if (!this.isRunning) return;
 
-        const currentPlayer = this.fighters[this.currentIndex];
-        const opponent = this.fighters[(this.currentIndex + 1) % 2];
+        const currentFighter = this.fighters[this.currentIndex];
+        const opponentFighter = this.fighters[(this.currentIndex + 1) % 2];
 
-        const result = currentPlayer.doAttack(opponent);
+        console.log(`Current turn: ${currentFighter.name}`);
+        this.fightersLog();
+
+        const result = currentFighter.doAttack(opponentFighter);
         if (result.isCrit) {
-            console.log(`${currentPlayer.name} dealt (critical) ${result.damage} damage to ${opponent.name}`);
+            console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
         } else if (!result.isMiss) {
-            console.log(`${currentPlayer.name} dealt ${result.damage} damage to ${opponent.name}`);
+            console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}`);
         } else {
-            console.log(`${currentPlayer.name} missed an attack to ${opponent.name}`);
+            console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}`);
         }
 
-        if (!opponent.isAlive()) {
-            this.winner = currentPlayer;
+        if (!opponentFighter.isAlive()) {
+            this.winner = currentFighter;
             this.isRunning = false;
         }
 
@@ -46,7 +49,14 @@ export class CombatEngine {
             this.currentIndex = (this.currentIndex + 1) % 2
             this.loop();
         } else {
-            console.log(`${this.winner} wins!`);
+            console.log(`${this.winner.name} wins!`);
         }
+    }
+
+    /** Get each fighter's status data log */ 
+    fightersLog () {
+        this.fighters.forEach(fighter => {
+            console.log(fighter.getStr());
+        });
     }
 }

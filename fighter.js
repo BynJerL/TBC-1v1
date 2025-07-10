@@ -103,4 +103,10 @@ export class Fighter {
             isMiss: false
         };
     }
+
+    /** Get a string representation of the fighter's status.
+     * @returns {string}*/
+    getStr () {
+        return `${this.name} [HP: ${this.currHp}/${this.maxHp}] [SP: ${this.currSp}/${this.maxSp}] [ATK: ${this.attack}] [DEF: ${this.defense}] [SPD: ${this.speed}]`;
+    }
 }
