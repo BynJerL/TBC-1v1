@@ -203,6 +203,10 @@
     display: block;
 }
 
+#action-bar button:hover:disabled > .action-name {
+    display: none;
+}
+
 #action-bar button .action-icon {
     font-size: 24px;
 }

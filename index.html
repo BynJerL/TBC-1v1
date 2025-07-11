@@ -63,19 +63,19 @@
                 <button id="next-button"></button>
             </div>
             <div id="action-bar">
-                <button id="attack-button">
+                <button id="attack-button" title="">
                     <div class="action-icon">&spades;</div>
                     <div class="action-name">Attack</div>
                 </button>
-                <button id="defend-button"> 
+                <button id="defend-button" title=""> 
                     <div class="action-icon">&#x265c;</div>
                     <div class="action-name">Defend</div>
                 </button>
-                <button id="special-button">
+                <button id="special-button" title="">
                     <div class="action-icon">&#x2726;</div>
                     <div class="action-name">Special</div>
                 </button>
-                <button class="check-stats-button">
+                <button class="check-stats-button" title="">
                     <div class="action-icon">&#x1f441;</div>
                     <div class="action-name">Stats</div>
                 </button>
@@ -84,15 +84,47 @@
     </div>
     <script type="module" src="./main.js"></script>
     <script>
+        var selectedAction = null;
+
+        function disableButtons() {
+            document.querySelectorAll('#action-bar button').forEach(button => {
+                button.disabled = true;
+                button.classList.add('disabled');
+                button.attributes['title'].value = `Cannot use "${button.querySelector(".action-name").textContent}" now.`;
+            });
+        }
+
         // Add event listeners for buttons
         document.getElementById('attack-button').addEventListener('click', () => {
             console.log('Attack button clicked');
-            document.getElementById('action-text').textContent = 'You chose to attack!';
+            document.getElementById('action-text').textContent = 'You have clicked attack button. Click again to proceed.';
+
+            if (selectedAction !== 'attack') {
+                selectedAction = 'attack';
+                return;
+            }
+
+            if (selectedAction === 'attack') {
+                document.getElementById('action-text').textContent = 'You attacked the enemy!';
+                selectedAction = null;
+                disableButtons();
+            }
         });
 
         document.getElementById('defend-button').addEventListener('click', () => {
             console.log('Defend button clicked');
-            document.getElementById('action-text').textContent = 'You chose to defend!';
+
+            if (selectedAction !== 'defend') {
+                selectedAction = 'defend';
+                document.getElementById('action-text').textContent = 'You have clicked defend button. Click again to proceed.';
+                return;
+            }
+
+            if (selectedAction === 'defend') {
+                document.getElementById('action-text').textContent = 'You defended yourself against the enemy attack!';
+                selectedAction = null;
+                disableButtons();
+            }
         });
 
         document.getElementById('special-button').addEventListener('click', () => {
