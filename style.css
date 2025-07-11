@@ -8,6 +8,7 @@
     background-color: aliceblue;
     display: flex;
     flex-direction: column;
+    user-select: none;
 }
 
 #top-bar {
@@ -94,6 +95,8 @@
     font-size: 12px;
     font-weight: 600;
     color: #fafafa;
+    position: relative;
+    font-family: monospace;
 }
 
 .fighter-hp, .fighter-sp {
@@ -127,6 +130,10 @@
     background-color: #0ae;
 }
 
+#enemy-sprite .hp-fill, #enemy-sprite .sp-fill {
+    right: 0;
+}
+
 .fighter-hp .hp-icon, .fighter-sp .sp-icon {
     width: 10%;
     height: 100%;
@@ -149,6 +156,7 @@
     position: absolute;
     font-size: 9px;
     font-weight: 750;
+    font-family: monospace;
     color: white;
     text-shadow: 1px 1px 2px black;
     height: 100%;
@@ -168,8 +176,8 @@
 }
 
 #action-bar button {
-    font-size: 12px;
-    font-weight: 600;
+    width: 32px;
+    height: 32px;
     color: rgb(5, 95, 95);
     display: flex;
     align-items: center;
@@ -177,8 +185,26 @@
     border: 2px solid rgb(5, 95, 95);
     background-color: #fafafa;
     border-radius: 5px;
-    height: 30px;
     cursor: pointer;
+    position: relative;
+}
+
+#action-bar button .action-name {
+    position: absolute;
+    bottom: -13.5px;
+    font-size: 10px;
+    font-weight: 900;
+    font-family: monospace;
+    color: rgb(5, 95, 95);
+    display: none;
+}
+
+#action-bar button:hover > .action-name {
+    display: block;
+}
+
+#action-bar button .action-icon {
+    font-size: 24px;
 }
 
 #action-bar button:hover {
@@ -192,4 +218,18 @@
     color: #444;
     border: 2px solid #888;
     cursor: not-allowed;
+}
+
+#next-button {
+    position: absolute;
+    display: flex;
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    right: 7.5px;
+    bottom: 7.5px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
