@@ -59,7 +59,7 @@
         </div>
         <div id="bottom-bar">
             <div id="action-info">
-                <div id="action-text">Choose your action</div>
+                <div id="action-text">Choose your action.</div>
                 <button id="next-button"></button>
             </div>
             <div id="action-bar">
@@ -85,6 +85,7 @@
     <script type="module" src="./main.js"></script>
     <script>
         var selectedAction = null;
+        var actionTimeoutId = null;
 
         function disableButtons() {
             document.querySelectorAll('#action-bar button').forEach(button => {
@@ -94,13 +95,33 @@
             });
         }
 
+        function enableButtons() {
+            document.querySelectorAll('#action-bar button').forEach(button => {
+                button.disabled = false;
+                button.classList.remove('disabled');
+                button.attributes['title'].value = '';
+            });
+        }
+
         // Add event listeners for buttons
         document.getElementById('attack-button').addEventListener('click', () => {
             console.log('Attack button clicked');
-            document.getElementById('action-text').textContent = 'You have clicked attack button. Click again to proceed.';
 
             if (selectedAction !== 'attack') {
                 selectedAction = 'attack';
+                document.getElementById('action-text').textContent = 'You have clicked attack button. Click again to proceed.';
+                
+                if (actionTimeoutId) {
+                    clearTimeout(actionTimeoutId);
+                }
+                
+                actionTimeoutId = setTimeout(() => {
+                    if (selectedAction === 'attack') {
+                        document.getElementById('action-text').textContent = 'Choose your action.';
+                        selectedAction = null;
+                    }
+                    actionTimeoutId = null;
+                }, 5000);
                 return;
             }
 
@@ -108,6 +129,12 @@
                 document.getElementById('action-text').textContent = 'You attacked the enemy!';
                 selectedAction = null;
                 disableButtons();
+                document.getElementById('next-button').style.display = 'block';
+
+                if (actionTimeoutId) {
+                    clearTimeout(actionTimeoutId);
+                    actionTimeoutId = null;
+                }
             }
         });
 
@@ -117,6 +144,18 @@
             if (selectedAction !== 'defend') {
                 selectedAction = 'defend';
                 document.getElementById('action-text').textContent = 'You have clicked defend button. Click again to proceed.';
+                
+                if (actionTimeoutId) {
+                    clearTimeout(actionTimeoutId);
+                }
+                
+                actionTimeoutId = setTimeout(() => {
+                    if (selectedAction === 'defend') {
+                        document.getElementById('action-text').textContent = 'Choose your action.';
+                        selectedAction = null;
+                    }
+                    actionTimeoutId = null;
+                }, 5000);
                 return;
             }
 
@@ -124,6 +163,12 @@
                 document.getElementById('action-text').textContent = 'You defended yourself against the enemy attack!';
                 selectedAction = null;
                 disableButtons();
+                document.getElementById('next-button').style.display = 'block';
+
+                if (actionTimeoutId) {
+                    clearTimeout(actionTimeoutId);
+                    actionTimeoutId = null;
+                }
             }
         });
 
@@ -135,6 +180,13 @@
         document.querySelector('.check-stats-button').addEventListener('click', () => {
             console.log('Check stats button clicked');
             document.getElementById('action-text').textContent = 'You chose to check your stats!';
+        });
+
+        document.getElementById('next-button').addEventListener('click', () => {
+            console.log('Next button clicked');
+            enableButtons();
+            document.getElementById('next-button').style.display = 'none';
+            document.getElementById('action-text').textContent = 'Choose your action.';
         });
     </script>
 </body>

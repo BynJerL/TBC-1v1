@@ -182,11 +182,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgb(5, 95, 95);
+    border: 2.5px solid rgb(5, 95, 95);
     background-color: #fafafa;
     border-radius: 5px;
     cursor: pointer;
     position: relative;
+    box-sizing: border-box;
 }
 
 #action-bar button .action-name {
@@ -230,7 +231,7 @@
 
 #next-button {
     position: absolute;
-    display: flex;
+    display: none;
     width: 16px;
     height: 16px;
     border-radius: 16px;
