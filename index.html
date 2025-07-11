@@ -58,7 +58,8 @@
             </div>
         </div>
         <div id="bottom-bar">
-            <div id="action-info">Action Info
+            <div id="action-info">
+                <div id="action-text">Choose your action</div>
                 <button id="next-button"></button>
             </div>
             <div id="action-bar">
@@ -82,5 +83,27 @@
         </div>
     </div>
     <script type="module" src="./main.js"></script>
+    <script>
+        // Add event listeners for buttons
+        document.getElementById('attack-button').addEventListener('click', () => {
+            console.log('Attack button clicked');
+            document.getElementById('action-text').textContent = 'You chose to attack!';
+        });
+
+        document.getElementById('defend-button').addEventListener('click', () => {
+            console.log('Defend button clicked');
+            document.getElementById('action-text').textContent = 'You chose to defend!';
+        });
+
+        document.getElementById('special-button').addEventListener('click', () => {
+            console.log('Special button clicked');
+            document.getElementById('action-text').textContent = 'You chose to use special!';
+        });
+
+        document.querySelector('.check-stats-button').addEventListener('click', () => {
+            console.log('Check stats button clicked');
+            document.getElementById('action-text').textContent = 'You chose to check your stats!';
+        });
+    </script>
 </body>
 </html>

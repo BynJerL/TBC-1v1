@@ -220,6 +220,10 @@
     cursor: not-allowed;
 }
 
+#action-text {
+    font-family: monospace;
+}
+
 #next-button {
     position: absolute;
     display: flex;
