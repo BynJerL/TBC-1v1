@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id="game-container">Check console
+    <div id="game-container">
         <div id="top-bar">
             <div id="turn-queue">
                 <div class="turn-item">Hero</div>
@@ -41,18 +41,18 @@
                 <div class="fighter-stats" id="enemy-stats">
                     <div class="fighter-name">Enemy</div>
                     <div class="fighter-hp">
-                        <div class="hp-icon">&hearts;</div>
                         <div class="hp-bar">
                             <div class="hp-fill"></div>
                             <div class="hp-value">100/100</div>
                         </div>
+                        <div class="hp-icon">&hearts;</div>
                     </div>
                     <div class="fighter-sp">
-                        <div class="sp-icon">&diamondsuit;</div>
                         <div class="sp-bar">
                             <div class="sp-fill"></div>
                             <div class="sp-value">20/20</div>
                         </div>
+                        <div class="sp-icon">&diamondsuit;</div>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
         <div id="bottom-bar">
             <div id="action-info">Action Info</div>
             <div id="action-bar">
-                <button id="attack-button">⚔️ Attack</button>
+                <button id="attack-button" disabled>⚔️ Attack</button>
                 <button id="defend-button">🛡️ Defend</button>
                 <button id="special-button">🔵 Special</button>
                 <button class="check-stats-button">🔍 Check Stats</button>

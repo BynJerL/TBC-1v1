@@ -46,41 +46,59 @@
 
 .fighter-stats {
     width: 60%;
-    height: 36px;
+    height: 28px;
     position: absolute;
     bottom: 0;
+    /* background-color: rgba(16, 16, 16, .3); */
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .fighter-stats .fighter-name {
     position: absolute;
     top: -24px;
     font-size: 18px;
-    text-shadow: 2px 0 2px #111, -2px 0 2px #111, 0 2px 2px #111, 0 -2px 2px #111;
+    text-shadow: 2px 0 2px #111, -2px 0 2px #111, 0 2px 2px #111, 0 -2px 2px #111, 2px 2px 2px #111, -2px 2px 2px #111, 2px -2px 2px #111, -2px -2px 2px #111;
     color: #eee;
     font-weight: 700;
     font-style: italic;
 }
 
+#player-sprite .fighter-name {
+    left: 5px;
+}
+
+#enemy-sprite .fighter-name {
+    right: 5px;
+}
+
 #player-stats {
-    background-color: rgba(255, 0, 0, 0.75);
     left: 0;
 }
 
 #enemy-stats {
-    background-color: rgba(0, 0, 255, 0.75);
     right: 0;
 }
 
 #action-info {
-    width: 100%;
+    width: 350px;
+    margin: 5px;
+    margin-top: 0;
     height: 72px;
-    background-color: burlywood;
+    background-color:teal;
+    box-sizing: border-box;
+    border: 2px solid rgb(5, 95, 95);
+    border-radius: 7.5px;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fafafa;
 }
 
 .fighter-hp, .fighter-sp {
     width: 100%;
-    height: 14px;
-    margin: 2px;
+    height: 10px;
     display: flex;
     position: relative;
 }
@@ -88,7 +106,7 @@
 .fighter-hp .hp-bar, .fighter-sp .sp-bar {
     position: relative;
     height: 100%;
-    width: 80%;
+    width: 90%;
     border: 1px solid #555;
     border-radius: 7.5px;
     background-color: #999;
@@ -102,28 +120,76 @@
 }
 
 .hp-fill {
-    background-color: red;
+    background-color: #e00;
 }
 
 .sp-fill {
-    background-color: rgb(63, 63, 252);
+    background-color: #0ae;
 }
 
 .fighter-hp .hp-icon, .fighter-sp .sp-icon {
-    width: 15px;
+    width: 10%;
     height: 100%;
-    font-size: 12.5px;
+    font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-shadow: 1px 1px 1px #333;
+}
+
+.hp-icon {
+    color: #e00;
+}
+
+.sp-icon {
+    color: #0ae;
 }
 
 .fighter-hp .hp-value, .fighter-sp .sp-value {
     position: absolute;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 750;
     color: white;
     text-shadow: 1px 1px 2px black;
+    height: 100%;
     width: 100%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+#action-bar {
+    width: 350px;
+    margin: 5px;
+    margin-top: 0;
+    display: flex;
+    gap: 3px;
+}
+
+#action-bar button {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(5, 95, 95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(5, 95, 95);
+    background-color: #fafafa;
+    border-radius: 5px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#action-bar button:hover {
+    background-color: rgb(5, 95, 95);
+    border: 2px solid rgb(5, 95, 95);
+    color: #fafafa;
+}
+
+#action-bar button:disabled {
+    background-color: #888;
+    color: #444;
+    border: 2px solid #888;
+    cursor: not-allowed;
 }
