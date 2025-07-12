@@ -19,6 +19,7 @@ export class CombatEngine {
         this.currentIndex = 0;
         this.isRunning = true;
         this.winner = null;
+        UIManager.initHPBars(this.userFighter, this.comFighter);
         this.loop();
     }
 
@@ -49,6 +50,7 @@ export class CombatEngine {
                     UIManager.writeActionInfo(`You have missed an attack to ${opponentFighter.name}.`)
                 }
 
+                UIManager.changeEnemyHPBar(opponentFighter);
                 UIManager.showNextButton();
 
                 if (!opponentFighter.isAlive()) {
@@ -84,6 +86,7 @@ export class CombatEngine {
                 UIManager.writeActionInfo(`${currentFighter.name} has missed an attack to ${opponentFighter.name}`);
             }
 
+            UIManager.changePlayerHPBar(opponentFighter);
             UIManager.showNextButton();
 
             if (!opponentFighter.isAlive()) {

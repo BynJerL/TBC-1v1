@@ -1,3 +1,5 @@
+import { Fighter } from "./fighter.js";
+
 export const UIManager = {
     selectedAction: null,
     actionTimeoutId: null,
@@ -53,5 +55,32 @@ export const UIManager = {
 
     writeActionInfo (content) {
         document.getElementById('action-text').innerHTML = content;
+    },
+
+    /**
+     * @param {Fighter} enemy */ 
+    changeEnemyHPBar (enemy) {
+        const hpPercentage = Math.floor(enemy.currHp * 100 / enemy.maxHp);
+        document.querySelector("#enemy-sprite .hp-fill").style.width = `${hpPercentage}%`;
+        document.querySelector("#enemy-sprite .hp-value").textContent = `${enemy.currHp}/${enemy.maxHp}`;
+    },
+
+    /**
+     * @param {Fighter} player */ 
+    changePlayerHPBar (player) {
+        const hpPercentage = Math.floor(player.currHp * 100 / player.maxHp);
+        document.querySelector("#player-sprite .hp-fill").style.width = `${hpPercentage}%`;
+        document.querySelector("#player-sprite .hp-value").textContent = `${player.currHp}/${player.maxHp}`;
+    },
+
+    /**
+     * @param {Fighter} userFighter
+     * @param {Fighter} comFighter  */ 
+    initHPBars (userFighter, comFighter) {
+        document.querySelectorAll(".hp-fill").forEach(hpFill => {
+            hpFill.style.width = "100%";
+        });
+        document.querySelector("#player-sprite .hp-value").textContent = `${userFighter.currHp}/${userFighter.maxHp}`;
+        document.querySelector("#enemy-sprite .hp-value").textContent = `${comFighter.currHp}/${comFighter.maxHp}`;
     }
 }
