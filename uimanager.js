@@ -6,6 +6,9 @@ export const UIManager = {
 
     enableButtons () {
         document.querySelectorAll("#action-bar button").forEach(button => {
+            const isDisabled = button.getAttribute("data-disabled");
+            if (isDisabled === "true") return;
+            
             button.disabled = false;
             button.attributes['title'].value = "";
         });
