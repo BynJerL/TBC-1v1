@@ -60,10 +60,36 @@ export class CombatEngine {
                     this.currentIndex = (this.currentIndex + 1) % 2;
                     document.getElementById("next-button").onclick = () => {
                         UIManager.enableButtons();
+                        document.getElementById("next-button").style.display = "none";
                         this.loop();
                     };
                 } else {
+                    UIManager.disableButtons();
                     console.log(`${this.winner.name} wins!`);
+                    UIManager.writeActionInfo("You win!");
+                }
+            };
+
+            document.getElementById("defend-button").onclick = () => {
+                UIManager.disableButtons();
+                currentFighter.isGuard = true;
+
+                console.log("You increased your guard.");
+                UIManager.writeActionInfo("You increased your guard.");
+
+                document.getElementById("next-button").style.display = "block";
+
+                if (this.isRunning) {
+                    this.currentIndex = (this.currentIndex + 1) % 2;
+                    document.getElementById("next-button").onclick = () => {
+                        UIManager.enableButtons();
+                        document.getElementById("next-button").style.display = "none";
+                        this.loop();
+                    };
+                } else {
+                    UIManager.disableButtons();
+                    console.log(`${this.winner.name} wins!`);
+                    UIManager.writeActionInfo("You win!");
                 }
             };
         } else {
