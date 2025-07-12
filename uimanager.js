@@ -12,5 +12,9 @@ export const UIManager = {
         document.querySelectorAll("#action-bar button").forEach(button => {
             button.disabled = true;
         });
+    },
+
+    writeActionInfo (content) {
+        document.getElementById('action-text').innerHTML = content;
     }
 }

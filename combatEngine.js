@@ -29,6 +29,8 @@ export class CombatEngine {
         const currentFighter = this.fighters[this.currentIndex];
         const opponentFighter = this.fighters[(this.currentIndex + 1) % 2];
 
+        currentFighter.isGuard = false;
+
         console.log(`Current turn: ${currentFighter.name}`);
         this.fightersLog();
 
@@ -37,11 +39,14 @@ export class CombatEngine {
                 UIManager.disableButtons();
                 const result = currentFighter.doAttack(opponentFighter);
                 if (result.isCrit) {
-                    console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
+                    console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
+                    UIManager.writeActionInfo(`You have dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
                 } else if (!result.isMiss) {
-                    console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}`);
+                    console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}.`);
+                    UIManager.writeActionInfo(`You have dealt ${result.damage} damage to ${opponentFighter.name}.`);
                 } else {
-                    console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}`);
+                    console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}.`);
+                    UIManager.writeActionInfo(`You have missed an attack to ${opponentFighter.name}.`)
                 } 
 
                 document.getElementById("next-button").style.display = "block";
