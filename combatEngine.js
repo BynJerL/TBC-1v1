@@ -35,7 +35,7 @@ export class CombatEngine {
         this.fightersLog();
 
         if (currentFighter === this.userFighter) {
-            document.getElementById("attack-button").onclick = () => {
+            UIManager.setAttackButtonListener(() => {
                 UIManager.disableButtons();
                 const result = currentFighter.doAttack(opponentFighter);
                 if (result.isCrit) {
@@ -47,76 +47,68 @@ export class CombatEngine {
                 } else {
                     console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}.`);
                     UIManager.writeActionInfo(`You have missed an attack to ${opponentFighter.name}.`)
-                } 
+                }
 
-                document.getElementById("next-button").style.display = "block";
+                UIManager.showNextButton();
 
                 if (!opponentFighter.isAlive()) {
                     this.winner = currentFighter;
                     this.isRunning = false;
                 }
 
-                if (this.isRunning) {
-                    this.currentIndex = (this.currentIndex + 1) % 2;
-                    document.getElementById("next-button").onclick = () => {
-                        UIManager.enableButtons();
-                        document.getElementById("next-button").style.display = "none";
-                        this.loop();
-                    };
-                } else {
-                    UIManager.disableButtons();
-                    console.log(`${this.winner.name} wins!`);
-                    UIManager.writeActionInfo("You win!");
-                }
-            };
-
-            document.getElementById("defend-button").onclick = () => {
+                this.checkGameState();
+            });
+            UIManager.setDefendButtonListener(() => {
                 UIManager.disableButtons();
                 currentFighter.isGuard = true;
+                currentFighter.gainSp(currentFighter.spGain);
 
-                console.log("You increased your guard.");
-                UIManager.writeActionInfo("You increased your guard.");
+                console.log("You have increased your defense.");
+                UIManager.writeActionInfo("You have increased your defense.");
 
-                document.getElementById("next-button").style.display = "block";
+                UIManager.showNextButton();
 
-                if (this.isRunning) {
-                    this.currentIndex = (this.currentIndex + 1) % 2;
-                    document.getElementById("next-button").onclick = () => {
-                        UIManager.enableButtons();
-                        document.getElementById("next-button").style.display = "none";
-                        this.loop();
-                    };
-                } else {
-                    UIManager.disableButtons();
-                    console.log(`${this.winner.name} wins!`);
-                    UIManager.writeActionInfo("You win!");
-                }
-            };
+                this.checkGameState();
+            });
         } else {
             UIManager.disableButtons();
             const result = currentFighter.doAttack(opponentFighter);
             if (result.isCrit) {
-                console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
+                console.log(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
+                UIManager.writeActionInfo(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
             } else if (!result.isMiss) {
-                console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}`);
+                console.log(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
+                UIManager.writeActionInfo(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
             } else {
-                console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}`);
+                console.log(`${currentFighter.name} has missed an attack to ${opponentFighter.name}`);
+                UIManager.writeActionInfo(`${currentFighter.name} has missed an attack to ${opponentFighter.name}`);
             }
+
+            UIManager.showNextButton();
 
             if (!opponentFighter.isAlive()) {
                 this.winner = currentFighter;
                 this.isRunning = false;
             }
 
-            if (this.isRunning) {
-                this.currentIndex = (this.currentIndex + 1) % 2;
-                setTimeout(() => {
-                    UIManager.enableButtons();
-                    this.loop();
-                }, 1000);
-            } else {
-                console.log(`${this.winner.name} wins!`);
-            }
+            this.checkGameState();
+        }
+    }
+
+    checkGameState () {
+        if (this.isRunning) {
+            this.currentIndex = ++this.currentIndex % 2;
+            UIManager.setNextButtonListener(() => {
+                UIManager.enableButtons();
+                UIManager.hideNextButton();
+                UIManager.writeActionInfo("Choose your action.");
+                this.loop();
+            });
+        } else {
+            UIManager.disableButtons();
+            UIManager.hideNextButton();
+            console.log(`${this.winner.name} wins!`);
+            UIManager.writeActionInfo("You win!");
         }
     }
 

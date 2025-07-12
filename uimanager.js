@@ -16,6 +16,41 @@ export const UIManager = {
         });
     },
 
+    /** Set the attack button onclick listener.
+     * @param {Function} callback 
+     */ 
+    setAttackButtonListener (callback) {
+        document.getElementById("attack-button").onclick = () => {
+            return callback();
+        };
+    },
+
+    /** Set the defend button onclick listener.
+     * @param {Function} callback 
+     */
+    setDefendButtonListener (callback) {
+        document.getElementById("defend-button").onclick = () => {
+            return callback();
+        };
+    },
+
+    showNextButton () {
+        document.getElementById("next-button").style.display = "block";
+    },
+
+    hideNextButton () {
+        document.getElementById("next-button").style.display = "none";
+    },
+
+    /** Set the next button onclick listener.
+     * @param {Function} callback 
+     */ 
+    setNextButtonListener (callback = () => {}) {
+        document.getElementById("next-button").onclick = () => {
+            return callback();
+        };
+    },
+
     writeActionInfo (content) {
         document.getElementById('action-text').innerHTML = content;
     }

@@ -8,8 +8,10 @@ export class Fighter {
      * @param {number} evasion initial value of evasion point of the fighter.
      * @param {number} speed initial value of speed point of the fighter.
      * @param {number} critChance initial value of chance of critical hit.
-     * @param {number} critDamage initial value of damage boost from critical hit. */ 
-    constructor ({name, Hp, Sp, attack, defense, speed, evasion = 0.05, critChance = 0.1, critDamage = 0.5}) {
+     * @param {number} critDamage initial value of damage boost from critical hit. 
+     * @param {number} spGain initial value of skill point gain from guarding.
+     * */ 
+    constructor ({name, Hp, Sp, attack, defense, speed, evasion = 0.05, critChance = 0.1, critDamage = 0.5, spGain = 3}) {
         this.name = name;
         this.currHp = Hp;
         this.maxHp = Hp;
@@ -21,6 +23,7 @@ export class Fighter {
         this.evasion = evasion;
         this.critChance = critChance;
         this.critDamage = critDamage;
+        this.spGain = spGain;
         this.isGuard = false;
     }
 
