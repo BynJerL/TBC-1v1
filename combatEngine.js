@@ -1,4 +1,5 @@
 import { Fighter } from "./fighter.js";
+import { UIManager } from "./uimanager.js";
 
 export class CombatEngine {
     /** An object used to manage the game combat.
@@ -33,7 +34,7 @@ export class CombatEngine {
 
         if (currentFighter === this.userFighter) {
             document.getElementById("attack-button").onclick = () => {
-                document.getElementById("attack-button").disabled = true;
+                UIManager.disableButtons();
                 const result = currentFighter.doAttack(opponentFighter);
                 if (result.isCrit) {
                     console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
@@ -53,7 +54,7 @@ export class CombatEngine {
                 if (this.isRunning) {
                     this.currentIndex = (this.currentIndex + 1) % 2;
                     document.getElementById("next-button").onclick = () => {
-                        document.getElementById("attack-button").disabled = false;
+                        UIManager.enableButtons();
                         this.loop();
                     };
                 } else {
@@ -61,6 +62,7 @@ export class CombatEngine {
                 }
             };
         } else {
+            UIManager.disableButtons();
             const result = currentFighter.doAttack(opponentFighter);
             if (result.isCrit) {
                 console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
@@ -78,6 +80,7 @@ export class CombatEngine {
             if (this.isRunning) {
                 this.currentIndex = (this.currentIndex + 1) % 2;
                 setTimeout(() => {
+                    UIManager.enableButtons();
                     this.loop();
                 }, 1000);
             } else {
