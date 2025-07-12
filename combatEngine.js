@@ -31,27 +31,58 @@ export class CombatEngine {
         console.log(`Current turn: ${currentFighter.name}`);
         this.fightersLog();
 
-        const result = currentFighter.doAttack(opponentFighter);
-        if (result.isCrit) {
-            console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
-        } else if (!result.isMiss) {
-            console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}`);
-        } else {
-            console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}`);
-        }
+        if (currentFighter === this.userFighter) {
+            document.getElementById("attack-button").onclick = () => {
+                document.getElementById("attack-button").disabled = true;
+                const result = currentFighter.doAttack(opponentFighter);
+                if (result.isCrit) {
+                    console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
+                } else if (!result.isMiss) {
+                    console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}`);
+                } else {
+                    console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}`);
+                } 
 
-        if (!opponentFighter.isAlive()) {
-            this.winner = currentFighter;
-            this.isRunning = false;
-        }
+                document.getElementById("next-button").style.display = "block";
 
-        if (this.isRunning) {
-            this.currentIndex = (this.currentIndex + 1) % 2
-            setTimeout(() => {
-                this.loop();
-            }, 1000);
+                if (!opponentFighter.isAlive()) {
+                    this.winner = currentFighter;
+                    this.isRunning = false;
+                }
+
+                if (this.isRunning) {
+                    this.currentIndex = (this.currentIndex + 1) % 2;
+                    document.getElementById("next-button").onclick = () => {
+                        document.getElementById("attack-button").disabled = false;
+                        this.loop();
+                    };
+                } else {
+                    console.log(`${this.winner.name} wins!`);
+                }
+            };
         } else {
-            console.log(`${this.winner.name} wins!`);
+            const result = currentFighter.doAttack(opponentFighter);
+            if (result.isCrit) {
+                console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
+            } else if (!result.isMiss) {
+                console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}`);
+            } else {
+                console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}`);
+            }
+
+            if (!opponentFighter.isAlive()) {
+                this.winner = currentFighter;
+                this.isRunning = false;
+            }
+
+            if (this.isRunning) {
+                this.currentIndex = (this.currentIndex + 1) % 2;
+                setTimeout(() => {
+                    this.loop();
+                }, 1000);
+            } else {
+                console.log(`${this.winner.name} wins!`);
+            }
         }
     }
 
