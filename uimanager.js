@@ -61,6 +61,24 @@ export const UIManager = {
     },
 
     /**
+     * @param {string} content */ 
+    typeWriterActionInfo (content) {
+        const el = document.getElementById('action-text');
+        el.innerHTML = "";
+
+        let i = 0;
+        const speed = 5;
+        function type () {
+            if (i < content.length) {
+                el.textContent += content.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    },
+
+    /**
      * @param {Fighter} enemy */ 
     updateEnemyHPBar (enemy) {
         const hpPercentage = Math.floor(enemy.currHp * 100 / enemy.maxHp);

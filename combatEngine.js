@@ -46,14 +46,14 @@ export class CombatEngine {
                 if (result.isCrit) {
                     UIManager.flickerEnemySprite();
                     console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
-                    UIManager.writeActionInfo(`You have dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
+                    UIManager.typeWriterActionInfo(`You have dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
                 } else if (!result.isMiss) {
                     UIManager.flickerEnemySprite();
                     console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}.`);
-                    UIManager.writeActionInfo(`You have dealt ${result.damage} damage to ${opponentFighter.name}.`);
+                    UIManager.typeWriterActionInfo(`You have dealt ${result.damage} damage to ${opponentFighter.name}.`);
                 } else {
                     console.log(`${currentFighter.name} missed an attack to ${opponentFighter.name}.`);
-                    UIManager.writeActionInfo(`You have missed an attack to ${opponentFighter.name}.`)
+                    UIManager.typeWriterActionInfo(`You have missed an attack to ${opponentFighter.name}.`)
                 }
 
                 UIManager.updateEnemyHPBar(opponentFighter);
@@ -86,14 +86,14 @@ export class CombatEngine {
             if (result.isCrit) {
                 UIManager.flickerPlayerSprite();
                 console.log(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
-                UIManager.writeActionInfo(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
+                UIManager.typeWriterActionInfo(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
             } else if (!result.isMiss) {
                 UIManager.flickerPlayerSprite();
                 console.log(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
-                UIManager.writeActionInfo(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
+                UIManager.typeWriterActionInfo(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
             } else {
                 console.log(`${currentFighter.name} has missed an attack to ${opponentFighter.name}`);
-                UIManager.writeActionInfo(`${currentFighter.name} has missed an attack to ${opponentFighter.name}`);
+                UIManager.typeWriterActionInfo(`${currentFighter.name} has missed an attack to ${opponentFighter.name}`);
             }
 
             UIManager.updatePlayerHPBar(opponentFighter);

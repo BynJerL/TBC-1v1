@@ -254,5 +254,5 @@
 }
 
 .sprite-hit {
-    animation: flicker-hit 0.4s linear;
+    animation: flicker-hit 0.4s ease;
 }
