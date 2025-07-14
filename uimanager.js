@@ -8,7 +8,7 @@ export const UIManager = {
         document.querySelectorAll("#action-bar button").forEach(button => {
             const isDisabled = button.getAttribute("data-disabled");
             if (isDisabled === "true") return;
-            
+
             button.disabled = false;
             button.attributes['title'].value = "";
         });
@@ -85,5 +85,15 @@ export const UIManager = {
         });
         document.querySelector("#player-sprite .hp-value").textContent = `${userFighter.currHp}/${userFighter.maxHp}`;
         document.querySelector("#enemy-sprite .hp-value").textContent = `${comFighter.currHp}/${comFighter.maxHp}`;
+    },
+
+    highlightPlayer () {
+        document.querySelector("#player-sprite .sprite-image").style.filter = "";
+        document.querySelector("#enemy-sprite .sprite-image").style.filter = "brightness(40%)";
+    },
+
+    highlightEnemy () {
+        document.querySelector("#player-sprite .sprite-image").style.filter = "brightness(40%)";
+        document.querySelector("#enemy-sprite .sprite-image").style.filter = "";
     }
 }

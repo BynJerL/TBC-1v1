@@ -36,6 +36,7 @@ export class CombatEngine {
         this.fightersLog();
 
         if (currentFighter === this.userFighter) {
+            UIManager.highlightPlayer();
             UIManager.setAttackButtonListener(() => {
                 UIManager.disableButtons();
                 const result = currentFighter.doAttack(opponentFighter);
@@ -73,6 +74,7 @@ export class CombatEngine {
                 this.checkGameState();
             });
         } else {
+            UIManager.highlightEnemy();
             UIManager.disableButtons();
             const result = currentFighter.doAttack(opponentFighter);
             if (result.isCrit) {
