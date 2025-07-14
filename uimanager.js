@@ -62,7 +62,7 @@ export const UIManager = {
 
     /**
      * @param {Fighter} enemy */ 
-    changeEnemyHPBar (enemy) {
+    updateEnemyHPBar (enemy) {
         const hpPercentage = Math.floor(enemy.currHp * 100 / enemy.maxHp);
         document.querySelector("#enemy-sprite .hp-fill").style.width = `${hpPercentage}%`;
         document.querySelector("#enemy-sprite .hp-value").textContent = `${enemy.currHp}/${enemy.maxHp}`;
@@ -70,10 +70,18 @@ export const UIManager = {
 
     /**
      * @param {Fighter} player */ 
-    changePlayerHPBar (player) {
+    updatePlayerHPBar (player) {
         const hpPercentage = Math.floor(player.currHp * 100 / player.maxHp);
         document.querySelector("#player-sprite .hp-fill").style.width = `${hpPercentage}%`;
         document.querySelector("#player-sprite .hp-value").textContent = `${player.currHp}/${player.maxHp}`;
+    },
+
+    /**
+     * @param {Fighter} player */ 
+    updatePlayerSPBar (player) {
+        const spPercentage = Math.floor(player.currSp * 100 / player.maxSp);
+        document.querySelector("#player-sprite .sp-fill").style.width = `${spPercentage}%`;
+        document.querySelector("#player-sprite .sp-value").textContent = `${player.currSp}/${player.maxSp}`;
     },
 
     /**
@@ -85,6 +93,18 @@ export const UIManager = {
         });
         document.querySelector("#player-sprite .hp-value").textContent = `${userFighter.currHp}/${userFighter.maxHp}`;
         document.querySelector("#enemy-sprite .hp-value").textContent = `${comFighter.currHp}/${comFighter.maxHp}`;
+    },
+
+    /**
+     * @param {Fighter} userFighter
+     * @param {Fighter} comFighter */ 
+    initSPBars (userFighter, comFighter) {
+        const playerSpPercentage = Math.floor(userFighter.currSp * 100 / userFighter.maxSp);
+        const enemySpPercentage = Math.floor(comFighter.currSp * 100 / comFighter.maxSp);
+        document.querySelector("#player-sprite .sp-fill").style.width = `${playerSpPercentage}%`;
+        document.querySelector("#enemy-sprite .sp-fill").style.width = `${enemySpPercentage}%`;
+        document.querySelector("#player-sprite .sp-value").textContent = `${userFighter.currSp}/${userFighter.maxSp}`;
+        document.querySelector("#enemy-sprite .sp-value").textContent = `${comFighter.currSp}/${comFighter.maxSp}`;
     },
 
     highlightPlayer () {

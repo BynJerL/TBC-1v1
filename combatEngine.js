@@ -19,7 +19,9 @@ export class CombatEngine {
         this.currentIndex = 0;
         this.isRunning = true;
         this.winner = null;
+        this.userFighter.currSp = Math.floor(this.userFighter.maxSp / 2);
         UIManager.initHPBars(this.userFighter, this.comFighter);
+        UIManager.initSPBars(this.userFighter, this.comFighter);
         this.loop();
     }
 
@@ -51,7 +53,7 @@ export class CombatEngine {
                     UIManager.writeActionInfo(`You have missed an attack to ${opponentFighter.name}.`)
                 }
 
-                UIManager.changeEnemyHPBar(opponentFighter);
+                UIManager.updateEnemyHPBar(opponentFighter);
                 UIManager.showNextButton();
 
                 if (!opponentFighter.isAlive()) {
@@ -67,6 +69,7 @@ export class CombatEngine {
                 currentFighter.gainSp(currentFighter.spGain);
 
                 console.log("You have increased your defense.");
+                UIManager.updatePlayerSPBar(currentFighter);
                 UIManager.writeActionInfo("You have increased your defense.");
 
                 UIManager.showNextButton();
@@ -88,7 +91,7 @@ export class CombatEngine {
                 UIManager.writeActionInfo(`${currentFighter.name} has missed an attack to ${opponentFighter.name}`);
             }
 
-            UIManager.changePlayerHPBar(opponentFighter);
+            UIManager.updatePlayerHPBar(opponentFighter);
             UIManager.showNextButton();
 
             if (!opponentFighter.isAlive()) {
