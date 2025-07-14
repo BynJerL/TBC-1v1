@@ -20,6 +20,7 @@ export class CombatEngine {
         this.isRunning = true;
         this.winner = null;
         this.userFighter.currSp = Math.floor(this.userFighter.maxSp / 2);
+        this.comFighter.currSp = Math.floor(this.comFighter.maxSp / 2);
         UIManager.initHPBars(this.userFighter, this.comFighter);
         UIManager.initSPBars(this.userFighter, this.comFighter);
         this.loop();
@@ -43,9 +44,11 @@ export class CombatEngine {
                 UIManager.disableButtons();
                 const result = currentFighter.doAttack(opponentFighter);
                 if (result.isCrit) {
+                    UIManager.flickerEnemySprite();
                     console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
                     UIManager.writeActionInfo(`You have dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
                 } else if (!result.isMiss) {
+                    UIManager.flickerEnemySprite();
                     console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}.`);
                     UIManager.writeActionInfo(`You have dealt ${result.damage} damage to ${opponentFighter.name}.`);
                 } else {
@@ -81,9 +84,11 @@ export class CombatEngine {
             UIManager.disableButtons();
             const result = currentFighter.doAttack(opponentFighter);
             if (result.isCrit) {
+                UIManager.flickerPlayerSprite();
                 console.log(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
                 UIManager.writeActionInfo(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
             } else if (!result.isMiss) {
+                UIManager.flickerPlayerSprite();
                 console.log(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
                 UIManager.writeActionInfo(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
             } else {

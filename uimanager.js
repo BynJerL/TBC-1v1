@@ -115,5 +115,21 @@ export const UIManager = {
     highlightEnemy () {
         document.querySelector("#player-sprite .sprite-image").style.filter = "brightness(40%)";
         document.querySelector("#enemy-sprite .sprite-image").style.filter = "";
+    },
+
+    flickerPlayerSprite () {
+        const sprite = document.querySelector("#player-sprite .sprite-image");
+        sprite.classList.add("sprite-hit");
+        setTimeout(() => {
+            sprite.classList.remove("sprite-hit");
+        }, 400);
+    },
+
+    flickerEnemySprite () {
+        const sprite = document.querySelector("#enemy-sprite .sprite-image");
+        sprite.classList.add("sprite-hit");
+        setTimeout(() => {
+            sprite.classList.remove("sprite-hit");
+        }, 400);
     }
 }

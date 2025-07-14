@@ -42,7 +42,7 @@
 #enemy-sprite .sprite-image {
     background-image: url(assets/img/Hero1.webp);
     background-size: contain;
-    /* filter: brightness(40%); */
+    /* filter: brightness(400%); */
 }
 
 .fighter-stats {
@@ -242,4 +242,17 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+@keyframes flicker-hit {
+    0% { filter: brightness(0%) invert(100%);}
+    20% { filter: brightness(40%) invert(0%);}
+    40% { filter: brightness(0%) invert(100%);}
+    60% { filter: brightness(40%) invert(0%);}
+    80% { filter: brightness(0%) invert(100%);}
+    100% { filter: brightness(40%) invert(0%);}
+}
+
+.sprite-hit {
+    animation: flicker-hit 0.4s linear;
 }
