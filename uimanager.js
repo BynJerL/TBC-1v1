@@ -157,5 +157,18 @@ export const UIManager = {
         setTimeout(() => {
             sprite.classList.remove("sprite-hit");
         }, 400);
+    },
+
+    showDamageText(target, damage) {
+        const sprite = document.querySelector(`#${target}`);
+        if (!sprite) return;
+        const dmgEl = document.createElement("div");
+        dmgEl.className = "damage-text";
+        dmgEl.textContent = `-${damage}`;
+        sprite.appendChild(dmgEl);
+
+        setTimeout(() => {
+            dmgEl.remove();
+        }, 800);
     }
 }

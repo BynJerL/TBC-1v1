@@ -45,10 +45,12 @@ export class CombatEngine {
                 const result = currentFighter.doAttack(opponentFighter);
                 if (result.isCrit) {
                     UIManager.flickerEnemySprite();
+                    UIManager.showDamageText("enemy-sprite", result.damage);
                     console.log(`${currentFighter.name} dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
                     UIManager.typeWriterActionInfo(`You have dealt (critical) ${result.damage} damage to ${opponentFighter.name}.`);
                 } else if (!result.isMiss) {
                     UIManager.flickerEnemySprite();
+                    UIManager.showDamageText("enemy-sprite", result.damage);
                     console.log(`${currentFighter.name} dealt ${result.damage} damage to ${opponentFighter.name}.`);
                     UIManager.typeWriterActionInfo(`You have dealt ${result.damage} damage to ${opponentFighter.name}.`);
                 } else {
@@ -89,10 +91,12 @@ export class CombatEngine {
             const result = currentFighter.doAttack(opponentFighter);
             if (result.isCrit) {
                 UIManager.flickerPlayerSprite();
+                UIManager.showDamageText("player-sprite", result.damage);
                 console.log(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
                 UIManager.typeWriterActionInfo(`${currentFighter.name} has dealt (critical) ${result.damage} damage to ${opponentFighter.name}`);
             } else if (!result.isMiss) {
                 UIManager.flickerPlayerSprite();
+                UIManager.showDamageText("player-sprite", result.damage);
                 console.log(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
                 UIManager.typeWriterActionInfo(`${currentFighter.name} has dealt ${result.damage} damage to ${opponentFighter.name}`);
             } else {
