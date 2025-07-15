@@ -57,14 +57,17 @@ export class CombatEngine {
                 }
 
                 UIManager.updateEnemyHPBar(opponentFighter);
-                UIManager.showNextButton();
 
-                if (!opponentFighter.isAlive()) {
-                    this.winner = currentFighter;
-                    this.isRunning = false;
-                }
+                setTimeout(() => {
+                    UIManager.showNextButton();
 
-                this.checkGameState();
+                    if (!opponentFighter.isAlive()) {
+                        this.winner = currentFighter;
+                        this.isRunning = false;
+                    }
+
+                    this.checkGameState();
+                }, 400);
             });
             UIManager.setDefendButtonListener(() => {
                 UIManager.disableButtons();
@@ -75,9 +78,10 @@ export class CombatEngine {
                 UIManager.updatePlayerSPBar(currentFighter);
                 UIManager.writeActionInfo("You have increased your defense.");
 
-                UIManager.showNextButton();
-
-                this.checkGameState();
+                setTimeout(() => {
+                    UIManager.showNextButton();
+                    this.checkGameState();
+                }, 400);
             });
         } else {
             UIManager.highlightEnemy();
@@ -97,14 +101,16 @@ export class CombatEngine {
             }
 
             UIManager.updatePlayerHPBar(opponentFighter);
-            UIManager.showNextButton();
+            setTimeout(() => {
+                UIManager.showNextButton();
 
-            if (!opponentFighter.isAlive()) {
-                this.winner = currentFighter;
-                this.isRunning = false;
-            }
+                if (!opponentFighter.isAlive()) {
+                    this.winner = currentFighter;
+                    this.isRunning = false;
+                }
 
-            this.checkGameState();
+                this.checkGameState();
+            }, 400);
         }
     }
 
@@ -118,10 +124,18 @@ export class CombatEngine {
                 this.loop();
             });
         } else {
-            UIManager.disableButtons();
-            UIManager.hideNextButton();
-            console.log(`${this.winner.name} wins!`);
-            UIManager.writeActionInfo("You win!");
+            UIManager.setNextButtonListener(() => {
+                UIManager.disableButtons();
+                UIManager.hideNextButton();
+                console.log(`${this.winner.name} wins!`);
+                if (this.winner === this.userFighter) {
+                    UIManager.blurEnemy();
+                    UIManager.writeActionInfo("You win!"); 
+                } else {
+                    UIManager.blurPlayer();
+                    UIManager.writeActionInfo("You lose!"); 
+                }
+            });
         }
     }
 

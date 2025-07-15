@@ -135,6 +135,14 @@ export const UIManager = {
         document.querySelector("#enemy-sprite .sprite-image").style.filter = "";
     },
 
+    blurPlayer () {
+        document.querySelector("#player-sprite .sprite-image").classList.add("beaten");
+    },
+
+    blurEnemy () {
+        document.querySelector("#enemy-sprite .sprite-image").classList.add("beaten");
+    },
+
     flickerPlayerSprite () {
         const sprite = document.querySelector("#player-sprite .sprite-image");
         sprite.classList.add("sprite-hit");
