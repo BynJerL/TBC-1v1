@@ -1,15 +1,16 @@
 export class Fighter {
     /** An object contains necessary data for the fighter.
-     * @param {string} name name of the fighter.
-     * @param {number} Hp initial value of health point of the fighter.
-     * @param {number} Sp initial value of skill point of the fighter.
-     * @param {number} attack initial value of attack point of the fighter.
-     * @param {number} defense initial value of defense point of the fighter.
-     * @param {number} evasion initial value of evasion point of the fighter.
-     * @param {number} speed initial value of speed point of the fighter.
-     * @param {number} critChance initial value of chance of critical hit.
-     * @param {number} critDamage initial value of damage boost from critical hit. 
-     * @param {number} spGain initial value of skill point gain from guarding.
+     * @param {object} playerData 
+     * @param {string} playerData.name name of the fighter.
+     * @param {number} playerData.Hp initial value of health point of the fighter.
+     * @param {number} playerData.Sp initial value of skill point of the fighter.
+     * @param {number} playerData.attack initial value of attack point of the fighter.
+     * @param {number} playerData.defense initial value of defense point of the fighter.
+     * @param {number} playerData.evasion initial value of evasion point of the fighter.
+     * @param {number} playerData.speed initial value of speed point of the fighter.
+     * @param {number} playerData.critChance initial value of chance of critical hit.
+     * @param {number} playerData.critDamage initial value of damage boost from critical hit. 
+     * @param {number} playerData.spGain initial value of skill point gain from guarding.
      * */ 
     constructor ({name, Hp, Sp, attack, defense, speed, evasion = 0.05, critChance = 0.1, critDamage = 0.5, spGain = 3}) {
         this.name = name;
